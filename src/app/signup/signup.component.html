@@ -1,0 +1,30 @@
+<div class="topcontainer">
+    <div class="container">
+        <div id="login">
+        <form [formGroup]="signupForm">
+            <fieldset class="clearfix">
+                <p>
+                    <span class="fontawesome-user"></span>
+                    <input type="text" placeholder="Name"  formControlName="name" [(ngModel)]='name'>
+                </p> 
+                <p>
+                    <span class="fontawesome-envelope"></span>
+                    <input type="text" placeholder="Email"  formControlName="email" [(ngModel)]='email'>
+                </p> 
+                <p>
+                    <span class="fontawesome-lock"></span>
+                    <input type="password"  placeholder="Password"  formControlName="password" [(ngModel)]='password'>
+                </p>
+                <p>
+                    <span class="fontawesome-lock"></span>
+                    <input type="password"  placeholder="Confirm password"  formControlName="confirmPassword" [(ngModel)]='confirmPassword'>
+                </p>
+                <p>
+                    <input [attr.disabled]="!signupForm.valid ? '' : null" (click)="doSubmit()" [ngClass]="{'disableClass':!signupForm.valid}" type="button" value="Sign Up" />
+                </p>
+            </fieldset>
+        </form>
+        <p>Not a member? <a href="javascript:void(0)" (click)="goToLogin()">Login now</a><span class="fontawesome-arrow-right"></span></p>
+        </div> <!-- end login -->
+    </div>
+</div>

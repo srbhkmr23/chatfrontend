@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, 
+body {
+    width: 100% !important;
+    height: 100% !important;
+    background: #2c3338;
+}
+body {
+    margin: 0;
+}
+
+
+.disableClass {
+    color: #e6b6d5;
+    opacity: 0.4;
+ }

@@ -1,0 +1,148 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+
+  <form [formGroup]="heroForm" >
+      <input id="email" class="form-control" formControlName="email" >
+        <div *ngIf="heroForm.controls.email.errors && heroForm.controls.email.errors.required">
+          email is required.
+        </div>
+        <div *ngIf="heroForm.controls.email.errors && !heroForm.controls.email.errors.required && heroForm.controls.email.invalid">
+          email not valid
+        </div>
+
+        {{heroForm.controls.email.value}}
+  </form>
+ </div> -->
+
+<div style="text-align:center">
+
+  <div id="frame">
+    <div id="sidepanel">
+      <div id="profile">
+        <div class="wrap">
+          <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+          <p>
+            <!-- Mike Ross -->
+            {{loginName}}
+
+          </p>
+          <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+          <div id="status-options">
+            <ul>
+              <li id="status-online" class="active">
+                <span class="status-circle"></span>
+                <p>Online</p>
+              </li>
+              <li id="status-away">
+                <span class="status-circle"></span>
+                <p>Away</p>
+              </li>
+              <li id="status-busy">
+                <span class="status-circle"></span>
+                <p>Busy</p>
+              </li>
+              <li id="status-offline">
+                <span class="status-circle"></span>
+                <p>Offline</p>
+              </li>
+            </ul>
+          </div>
+          <div id="expanded">
+            <label for="twitter">
+              <i class="fa fa-facebook fa-fw" aria-hidden="true"></i>
+            </label>
+            <input name="twitter" type="text" value="mikeross" />
+            <label for="twitter">
+              <i class="fa fa-twitter fa-fw" aria-hidden="true"></i>
+            </label>
+            <input name="twitter" type="text" value="ross81" />
+            <label for="twitter">
+              <i class="fa fa-instagram fa-fw" aria-hidden="true"></i>
+            </label>
+            <input name="twitter" type="text" value="mike.ross" />
+          </div>
+        </div>
+      </div>
+      <div id="search">
+        <label for="">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </label>
+        <input type="text" placeholder="Search contacts..." [(ngModel)]='searchKeyword' />
+      </div>
+      <div id="contacts">
+        <ul>
+          <div *ngFor="let user of usersList | searchpipe: searchKeyword">
+            <ng-container *ngIf="(user.email!=from)">
+              <li class="contact" [ngClass]="{'active':(toUserObject.email == user.email), 'hide' : (user.email==from)}" (click)="onSelectFriend(user)">
+                <!-- <ng-template> -->
+
+                <div class="wrap">
+                  <span class="contact-status" [ngClass]="{'online': allOnlineUsersList.hasOwnProperty(user.email)}"></span>
+                  <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                  <div class="meta">
+                    <p class="name">{{user.name}} </p>
+                    <p class="preview" *ngIf="notificationsObject[user.email] && notificationsObject[user.email]['count']>0">
+                      {{notificationsObject[user.email]['data']['message']}}
+                    </p>
+                  </div>
+                  <label *ngIf="notificationsObject[user.email] && notificationsObject[user.email]['count']>0" class="badge-Count"> {{notificationsObject[user.email]['count']}} </label>
+                </div>
+                <!-- *ngIf="notificationsObject[user.email] && notificationsObject[user.email]>0" -->
+                <!-- </ng-template> -->
+              </li>
+            </ng-container>
+          </div>
+        </ul>
+      </div>
+      <div id="bottom-bar">
+        <button id="addcontact">
+          <i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>
+          <span>Add contact</span>
+        </button>
+        <button id="settings">
+          <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
+          <span>Settings</span>
+        </button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="contact-profile">
+        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+        <p>
+          <!-- Harvey Specter -->
+          {{toUserObject.name}}
+        </p>
+        <div class="social-media">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="messages" id="messages">
+        <ul>
+          <li *ngFor="let message of allMessageList" [ngClass]="message.senderId == from?'sent':'replies'">
+            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+            <p>{{message.message}}</p>
+          </li>
+          <!-- <li class="replies">
+              <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+              <p>When you're backed against the wall, break the god damn thing down.</p>
+            </li> -->
+
+        </ul>
+      </div>
+      <div class="message-input">
+        <div class="wrap">
+          <input type="text" [(ngModel)]='msg' placeholder="Write your message..." (keyup)="onKeyUp($event)" />
+          <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+          <button type="button" (click)="sendMessage()" class="submit">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
